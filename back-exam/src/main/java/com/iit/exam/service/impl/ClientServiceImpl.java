@@ -57,6 +57,15 @@ public class ClientServiceImpl implements ClientService {
         Client client = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Client not found"));
         mapper.updateEntityFromDTO(dto, client);
+
+        if (dto.getComptes() != null && !dto.getComptes().isEmpty()) {
+            // Make sure all associated Comptes have their client reference set correctly
+            Client finalClient = client;
+            client.getComptes().stream()
+                    .filter(compte -> compte.getClient() == null) // If client is null
+                    .forEach(compte -> compte.setClient(finalClient)); // Set the client reference
+        }
+
         client = repository.save(client);
         return mapper.toDTO(client);
     }

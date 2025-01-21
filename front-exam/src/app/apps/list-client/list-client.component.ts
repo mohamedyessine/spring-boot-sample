@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { ClientDTO } from '../common/model/clientDTO';
 import { ClientManagementService } from '../common/service/clientManagement.service';
 import { ClientListDTO } from '../common/model/clientListDTO';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-list-client',
@@ -31,18 +32,32 @@ export class ClientListComponent implements OnInit {
     page: number = 0;
     size: number = 5;
     filter: string = '';
+    form: FormGroup;
+    isSubmitForm = false;
+    isLoading = false;
+    selectedClient: any;
+    @ViewChild('editModal') editModal: any;
     constructor(private clientService: ClientManagementService,
-        private router: Router) { }
+        private fb: FormBuilder,
+        private router: Router) {
+        this.form = this.fb.group({
+            cin: ['', Validators.required],
+            firstName: [''],
+            lastName: [''],
+            rib: [''],
+            solde: [0, Validators.min(0)]
+        });
+    }
 
     ngOnInit() {
         this.cols = [
             { field: 'id', title: 'ID', width: '15%' },
-            { field: 'cin', title: 'CIN', width: '15%' },
-            { field: 'firstName', title: 'First Name', width: '20%' },
-            { field: 'lastName', title: 'Last Name', width: '20%' },
+            { field: 'cin', title: 'CIN', width: '10%' },
+            { field: 'firstName', title: 'First Name', width: '15%' },
+            { field: 'lastName', title: 'Last Name', width: '15%' },
             { field: 'rib', title: 'RIB', width: '15%' },
             { field: 'solde', title: 'Solde', width: '15%' },
-            { field: 'action', title: 'Action', sort: false },
+            { field: 'action', title: 'Action', width: '15%', sort: false },
         ];
         this.loadClients();
     }
@@ -89,7 +104,7 @@ export class ClientListComponent implements OnInit {
 
     applyFilter() {
         if (this.filter.trim() === '') {
-            this.filteredClients =  [...this.clients];
+            this.filteredClients = [...this.clients];
         } else {
             this.filteredClients = this.clients.filter(client =>
                 client.data.firstName.toLowerCase().includes(this.filter.toLowerCase()) ||
@@ -99,10 +114,58 @@ export class ClientListComponent implements OnInit {
         }
     }
 
-    editClient(client: ClientDTO): void {
-        console.log('Edit client:', client);
-        // Add navigation to edit page if needed
+    openEditModal(client: any): void {
+        this.selectedClient = client;
+        this.form.patchValue(client);
+        this.isSubmitForm = false;
+        this.editModal.open();
     }
+
+    submitForm(): void {
+        this.isSubmitForm = true;
+        if (this.form.valid && this.selectedClient?.id) {
+            this.isLoading = true;
+
+            console.log("selected value ",this.selectedClient);
+
+            const updatedClient: ClientDTO = {
+                id: this.selectedClient?.id,
+                cin: this.form.value.cin,
+                firstName: this.form.value.firstName,
+                lastName: this.form.value.lastName,
+                comptes: [
+                    {
+                        rib: this.form.value.rib,
+                        solde: this.form.value.solde,
+                        clientId: this.selectedClient?.id,
+                    },
+                ],
+            };
+
+
+            this.clientService.updateClient(updatedClient, this.selectedClient.id).subscribe({
+                next: () => {
+                    this.isLoading = false;
+                    this.showMessage('Client updated successfully', 'success');
+                    this.loadClients();
+                    this.closeEditModal();
+                },
+                error: err => {
+                    this.isLoading = false;
+                    this.showMessage('Error updating client', 'error');
+                    console.error('Error updating client:', err);
+                },
+            });
+        } else {
+            this.showMessage('Form is invalid or client ID is missing', 'error');
+        }
+    }
+
+
+    closeEditModal(): void {
+        this.editModal.close();
+    }
+
 
     deleteClient(clientId: string): void {
         Swal.fire({
@@ -118,7 +181,7 @@ export class ClientListComponent implements OnInit {
                 this.clientService.deleteClient(clientId).subscribe({
                     next: () => {
                         this.showMessage('Client deleted successfully', 'success');
-                        this.loadClients(); // Reload clients after deletion
+                        this.loadClients(); 
                     },
                     error: err => {
                         this.showMessage('Error deleting client', 'error');

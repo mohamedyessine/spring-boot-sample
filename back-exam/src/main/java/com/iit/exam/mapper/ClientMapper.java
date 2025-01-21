@@ -1,12 +1,15 @@
 package com.iit.exam.mapper;
 
 import com.iit.exam.dto.ClientDTO;
+import com.iit.exam.dto.CompteDTO;
 import com.iit.exam.models.Client;
+import com.iit.exam.models.Compte;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Mapper(componentModel = "spring")
 public interface ClientMapper {

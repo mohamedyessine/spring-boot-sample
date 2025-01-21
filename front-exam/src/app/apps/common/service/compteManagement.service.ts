@@ -23,7 +23,10 @@ import { Configuration } from '../config/configuration';
 import { CustomHttpUrlEncodingCodec } from '../config/encoder';
 
 
-@Injectable()
+
+@Injectable({
+    providedIn: 'root',
+})
 export class CompteManagementService {
 
     protected basePath = 'http://localhost:8080';

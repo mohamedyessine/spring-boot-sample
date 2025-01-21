@@ -45,6 +45,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
 import { TreeTableModule } from 'primeng/treetable';
+import { AddCompteComponent } from './add-compte/add-compte.component';
 
 const routes: Routes = [
     { path: 'apps/chat', component: ChatComponent, title: 'Chat | VRISTO - Multipurpose Tailwind Dashboard Template' },
@@ -60,6 +61,8 @@ const routes: Routes = [
     { path: 'apps/calendar', component: CalendarComponent, title: 'Calendar | VRISTO - Multipurpose Tailwind Dashboard Template' },
     { path: 'apps/add-client', component: AddClientComponent, title: 'Client | VRISTO - Multipurpose Tailwind Dashboard Template' },
     { path: 'apps/list-client', component: ClientListComponent, title: 'Client List | VRISTO - Multipurpose Tailwind Dashboard Template' },
+    { path: 'apps/add-compte', component: AddCompteComponent, title: 'Compte | VRISTO - Multipurpose Tailwind Dashboard Template' },
+
 ];
 
 @NgModule({
@@ -98,7 +101,8 @@ const routes: Routes = [
         CalendarComponent,
         MailboxComponent,
         AddClientComponent,
-        ClientListComponent
+        ClientListComponent,
+        AddCompteComponent
     ],
 })
 export class AppsModule { }
