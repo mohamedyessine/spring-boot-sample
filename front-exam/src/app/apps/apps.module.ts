@@ -25,7 +25,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { NgxTippyModule } from 'ngx-tippy-wrapper';
 
 // datatable
-import { DataTableModule} from '@bhplugin/ng-datatable';
+import { DataTableModule } from '@bhplugin/ng-datatable';
 
 import { ScrumboardComponent } from './scrumboard';
 import { ContactsComponent } from './contacts';
@@ -39,6 +39,12 @@ import { ChatComponent } from './chat';
 import { MailboxComponent } from './mailbox';
 import { InvoiceListComponent } from './invoice/list';
 import { AddClientComponent } from './add-client/add-client.component';
+import { ClientListComponent } from './list-client/list-client.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { PaginatorModule } from 'primeng/paginator';
+import { ButtonModule } from 'primeng/button';
+import { TreeTableModule } from 'primeng/treetable';
 
 const routes: Routes = [
     { path: 'apps/chat', component: ChatComponent, title: 'Chat | VRISTO - Multipurpose Tailwind Dashboard Template' },
@@ -53,6 +59,7 @@ const routes: Routes = [
     { path: 'apps/invoice/edit', component: InvoiceEditComponent, title: 'Invoice Edit | VRISTO - Multipurpose Tailwind Dashboard Template' },
     { path: 'apps/calendar', component: CalendarComponent, title: 'Calendar | VRISTO - Multipurpose Tailwind Dashboard Template' },
     { path: 'apps/add-client', component: AddClientComponent, title: 'Client | VRISTO - Multipurpose Tailwind Dashboard Template' },
+    { path: 'apps/list-client', component: ClientListComponent, title: 'Client List | VRISTO - Multipurpose Tailwind Dashboard Template' },
 ];
 
 @NgModule({
@@ -61,9 +68,14 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        TreeTableModule,
+        PaginatorModule,
+        ButtonModule,
+        InputTextModule,
         ModalModule,
         SortablejsModule,
         MenuModule,
+        NgSelectModule,
         NgScrollbarModule.withConfig({
             visibility: 'hover',
             appearance: 'standard',
@@ -71,7 +83,7 @@ const routes: Routes = [
         QuillModule.forRoot(),
         FullCalendarModule,
         NgxTippyModule,
-        DataTableModule
+        DataTableModule,
     ],
     declarations: [
         ChatComponent,
@@ -85,7 +97,8 @@ const routes: Routes = [
         InvoiceEditComponent,
         CalendarComponent,
         MailboxComponent,
-        AddClientComponent
+        AddClientComponent,
+        ClientListComponent
     ],
 })
-export class AppsModule {}
+export class AppsModule { }

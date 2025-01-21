@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-export interface CompteDTO { 
+export interface CompteDTO {
     id?: string;
     rib?: string;
     solde?: number;
