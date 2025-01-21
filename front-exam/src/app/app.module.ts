@@ -52,25 +52,6 @@ import { AnalyticsComponent } from './analytics';
 import { FinanceComponent } from './finance';
 import { CryptoComponent } from './crypto';
 
-// widgets
-import { WidgetsComponent } from './widgets';
-
-// tables
-import { TablesComponent } from './tables';
-
-// font-icons
-import { FontIconsComponent } from './font-icons';
-
-// charts
-import { ChartsComponent } from './charts';
-
-// dragndrop
-import { DragndropComponent } from './dragndrop';
-
-// pages
-import { KnowledgeBaseComponent } from './pages/knowledge-base';
-import { FaqComponent } from './pages/faq';
-
 // Layouts
 import { AppLayout } from './layouts/app-layout';
 import { AuthLayout } from './layouts/auth-layout';
@@ -116,19 +97,12 @@ import { ThemeCustomizerComponent } from './layouts/theme-customizer';
         FooterComponent,
         SidebarComponent,
         ThemeCustomizerComponent,
-        TablesComponent,
-        FontIconsComponent,
-        ChartsComponent,
         IndexComponent,
         AnalyticsComponent,
         FinanceComponent,
         CryptoComponent,
-        WidgetsComponent,
-        DragndropComponent,
         AppLayout,
         AuthLayout,
-        KnowledgeBaseComponent,
-        FaqComponent,
     ],
 
     providers: [
