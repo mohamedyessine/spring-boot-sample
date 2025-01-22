@@ -65,7 +65,7 @@ export class ClientListComponent implements OnInit {
         this.clientService.getAllClients(this.page, this.size).subscribe({
             next: (response: ClientListDTO) => {
                 if (response.clients) {
-                    this.rows = this.mapClientDTOToRows(response.clients);
+                    this.rows = this.mapClientsWithComptes(response.clients);
                     this.filteredClients = [...this.rows];
                 }
                 this.totalElements = response.totalElements || 0;
@@ -88,6 +88,34 @@ export class ClientListComponent implements OnInit {
         }));
     }
 
+    //getall
+    mapClientsWithComptes(clients: any[]): any[] {
+        const rows: any[] = [];
+        clients.forEach(client => {
+            if (client.comptes && client.comptes.length > 0) {
+                client.comptes.forEach((compte: { rib: any; solde: any; }) => {
+                    rows.push({
+                        id: client.id,
+                        cin: client.cin,
+                        firstName: client.firstName,
+                        lastName: client.lastName,
+                        rib: compte.rib,
+                        solde: compte.solde,
+                    });
+                });
+            } else {
+                rows.push({
+                    id: client.id,
+                    cin: client.cin,
+                    firstName: client.firstName,
+                    lastName: client.lastName,
+                    rib: null,
+                    solde: null,
+                });
+            }
+        });
+        return rows;
+    }
 
     onPageChange(event: any): void {
         this.page = event.page;
