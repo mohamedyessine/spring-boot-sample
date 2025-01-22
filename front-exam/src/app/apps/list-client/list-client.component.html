@@ -18,14 +18,7 @@
                 <input id="lastName" type="text" placeholder="Enter Last Name" class="form-input"
                     formControlName="lastName" />
             </div>
-            <div>
-                <label for="rib">RIB</label>
-                <input id="rib" type="text" placeholder="Enter RIB" class="form-input" formControlName="rib" />
-            </div>
-            <div>
-                <label for="solde">Solde</label>
-                <input id="solde" type="number" placeholder="Enter Solde" class="form-input" formControlName="solde" />
-            </div>
+            
             <div class="flex justify-end">
                 <button type="submit" [disabled]="form.invalid || isLoading" class="btn btn-primary !mt-6">
                     <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"

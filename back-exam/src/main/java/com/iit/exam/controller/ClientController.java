@@ -61,4 +61,5 @@ public class ClientController {
             @RequestParam(defaultValue = "10") int size) {
         return ResponseEntity.ok(service.getAllClients(page, size));
     }
+
 }

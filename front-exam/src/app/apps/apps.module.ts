@@ -37,9 +37,9 @@ import { TreeTableModule } from 'primeng/treetable';
 import { AddCompteComponent } from './add-compte/add-compte.component';
 
 const routes: Routes = [
-    { path: 'apps/add-client', component: AddClientComponent, title: 'Client | VRISTO - Multipurpose Tailwind Dashboard Template' },
-    { path: 'apps/list-client', component: ClientListComponent, title: 'Client List | VRISTO - Multipurpose Tailwind Dashboard Template' },
-    { path: 'apps/add-compte', component: AddCompteComponent, title: 'Compte | VRISTO - Multipurpose Tailwind Dashboard Template' },
+    { path: 'apps/add-client', component: AddClientComponent, title: 'Client | BANK MANAGEMENT' },
+    { path: 'apps/list-client', component: ClientListComponent, title: 'Client List | BANK MANAGEMENT' },
+    { path: 'apps/add-compte', component: AddCompteComponent, title: 'Compte | BANK MANAGEMENT' },
 
 ];
 

@@ -17,10 +17,10 @@ export const routes: Routes = [
         component: AppLayout,
         children: [
             // dashboard
-            { path: '', component: IndexComponent, title: 'Sales Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
-            { path: 'analytics', component: AnalyticsComponent, title: 'Analytics Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
-            { path: 'finance', component: FinanceComponent, title: 'Finance Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
-            { path: 'crypto', component: CryptoComponent, title: 'Crypto Admin | VRISTO - Multipurpose Tailwind Dashboard Template' },
+            { path: '', component: IndexComponent, title: 'Sales Admin | BANK MANAGEMENT' },
+            { path: 'analytics', component: AnalyticsComponent, title: 'Analytics Admin | BANK MANAGEMENT' },
+            { path: 'finance', component: FinanceComponent, title: 'Finance Admin | BANK MANAGEMENT' },
+            { path: 'crypto', component: CryptoComponent, title: 'Crypto Admin | BANK MANAGEMENT' },
 
             //apps
             { path: '', loadChildren: () => import('./apps/apps.module').then((d) => d.AppsModule) },

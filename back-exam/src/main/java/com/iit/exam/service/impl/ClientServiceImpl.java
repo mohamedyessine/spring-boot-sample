@@ -54,19 +54,28 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDTO updateClient(UUID id, ClientDTO dto) {
+        // Fetch the existing client entity
         Client client = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Client not found"));
-        mapper.updateEntityFromDTO(dto, client);
 
-        if (dto.getComptes() != null && !dto.getComptes().isEmpty()) {
-            // Make sure all associated Comptes have their client reference set correctly
-            Client finalClient = client;
-            client.getComptes().stream()
-                    .filter(compte -> compte.getClient() == null) // If client is null
-                    .forEach(compte -> compte.setClient(finalClient)); // Set the client reference
+        // Update only the specified fields (cin, firstName, lastName)
+        if (dto.getCin() != null) {
+            client.setCin(dto.getCin());
+        }
+        if (dto.getFirstName() != null) {
+            client.setFirstName(dto.getFirstName());
+        }
+        if (dto.getLastName() != null) {
+            client.setLastName(dto.getLastName());
         }
 
+        // Avoid modifying the comptes list
+        // Any update to comptes in dto is ignored
+
+        // Save the updated client entity
         client = repository.save(client);
+
+        // Convert the updated entity back to DTO
         return mapper.toDTO(client);
     }
 
@@ -92,4 +101,5 @@ public class ClientServiceImpl implements ClientService {
                 .totalPages(pageResult.getTotalPages())
                 .build();
     }
+
 }

@@ -2,7 +2,6 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TreeNode } from 'primeng/api';
-import { TreeTable } from 'primeng/treetable';
 import Swal from 'sweetalert2';
 import { ClientDTO } from '../common/model/clientDTO';
 import { ClientManagementService } from '../common/service/clientManagement.service';

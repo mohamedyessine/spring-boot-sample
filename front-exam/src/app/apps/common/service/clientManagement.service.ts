@@ -27,7 +27,7 @@ import { CustomHttpUrlEncodingCodec } from '../config/encoder';
 })
 export class ClientManagementService {
 
-    protected basePath = 'http://localhost:8080';
+    protected basePath = 'http://localhost:8081';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
